@@ -1,5 +1,4 @@
 # Jonnier Cadena
-# Archivo principal para ejecutar el programa de gestión de tareas con MinHeap
 from min_heap import MinHeap
 
 heap = MinHeap()
