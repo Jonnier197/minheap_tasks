@@ -1,44 +1,20 @@
-class MinHeap:
-    def __init__(self):
-        self.heap = []
+# Jonnier Cadena
+# Archivo principal para ejecutar el programa de gestión de tareas con MinHeap
+from min_heap import MinHeap
 
-    def insert(self, name, priority):
-        self.heap.append((priority, name))
-        self._heapify_up(len(self.heap) - 1)
+heap = MinHeap()
 
-    def extract_min(self):
-        if not self.heap:
-            return None
-        self._swap(0, len(self.heap) - 1)
-        min_task = self.heap.pop()
-        self._heapify_down(0)
-        return min_task
+heap.insert("Estudiar para el examen", 3)
+heap.insert("Lavar los platos", 1)
+heap.insert("Hacer ejercicio", 4)
+heap.insert("Responder correos", 2)
 
-    def _heapify_up(self, index):
-        parent = (index - 1) // 2
-        while index > 0 and self.heap[index][0] < self.heap[parent][0]:
-            self._swap(index, parent)
-            index = parent
-            parent = (index - 1) // 2
+heap.print_heap()
 
-    def _heapify_down(self, index):
-        smallest = index
-        left = 2 * index + 1
-        right = 2 * index + 2
-
-        if left < len(self.heap) and self.heap[left][0] < self.heap[smallest][0]:
-            smallest = left
-        if right < len(self.heap) and self.heap[right][0] < self.heap[smallest][0]:
-            smallest = right
-
-        if smallest != index:
-            self._swap(index, smallest)
-            self._heapify_down(smallest)
-
-    def _swap(self, i, j):
-        self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
-
-    def print_heap(self):
-        print("Estado actual del heap:")
-        for priority, name in self.heap:
-            print(f"Tarea: {name}, Prioridad: {priority}")
+print("\nTareas extraídas por prioridad:")
+while True:
+    task = heap.extract_min()
+    if not task:
+        break
+    priority, name = task
+    print(f"Tarea: {name}, Prioridad: {priority}")
